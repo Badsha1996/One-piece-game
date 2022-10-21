@@ -1,0 +1,115 @@
+*,
+*::after,
+*::before{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+// Color Palettes 
+$primary-color       : #78C0F0;
+$primary-color-light : #30A8D8;
+$primary-color-dark  : #1890C0;
+
+$secondary-color-light : #F0F000; 
+$secondary-color-dark  : #F0C000; 
+
+$primary-light : #F0F0F0;
+$primary-dark  : #181818;
+
+// Flexbox 
+@mixin flexbox($type) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction:$type ;   
+}
+
+body{
+    background-color: $primary-dark; 
+}
+
+.title{
+    margin-top: 0.5em;
+    height: 5rem;
+    overflow: hidden;
+    @include flexbox(row);
+    &__image{
+        width: 10rem;
+    }
+}
+
+.main-container{
+    position: absolute;
+    box-sizing: content-box;
+    background-color: $primary-light;
+    width: 17rem;
+    padding: 2.5em 3em;
+    transform: translate(-50% , -50%);
+    left: 50%;
+    top: 50%;
+    box-shadow: 0 1em 2em rgba(0 , 0 ,0, 0.2);
+    border-radius: 0.5rem;
+    &__game{
+        position: relative;
+        width: 100%;
+        display: grid;
+        gap: 0.6em;
+    }
+
+    &__status{
+        text-align: left;
+        margin-bottom: 2em;
+        span{
+            font-weight: 600;
+        }
+    }
+
+}
+
+.controls-container{
+    position: absolute;
+    @include flexbox(column);
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top,
+                $primary-color-light, 
+                $primary-color,
+                $primary-color-dark);
+    top:0;
+    button{
+        font-size: 1.2rem;
+        box-shadow: 0 0.5rem 2em rgba(0 , 0 ,0, 0.2);
+    }
+}
+
+button{
+    border: none;
+    border-radius: 0.5em;
+    padding: 1em 1.5em;
+    cursor: pointer;
+}
+
+#stop{
+    font-size: 1.1rem;
+    display: block;
+    margin: 1.1em auto 0 auto;
+    background-color: $primary-dark;
+    color: $primary-color-light;
+}
+
+.hide{
+    display: none;
+}
+
+#result{
+    text-align: center;
+}
+
+
+
+
+
+
+

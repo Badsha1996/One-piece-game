@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>One Piece Game</title>
+        <link
+        rel="stylesheet" href="./css/styles.css">
+        <!-- ======== GOOGLE FONT ========== -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+    </head>
+    <body>
+        <!-- =============== TITLE IMAGE ================ -->
+        <div class="title">
+            <img src="./assets/logo.png" alt="one piece logo" class="title__image">
+        </div>
+        <!-- =============== GAME ================ -->
+
+        <div class="main-container">
+            <div class="main-container__status">
+                <div id="time"></div>
+                <div id="moves"></div>
+            </div>
+
+            <div class="main-container__game">
+                <button class="hide" id="stop">Stop Game</button>
+            </div>
+        </div>
+        <!-- =============== CONTROLS ================ -->
+
+        <div class="controls-container">
+            <p id="result"></p>
+            <button id="start">Play Game</button>
+        </div>
+
+        <!-- ========= Script file linking ========== -->
+        <script src="./main/main.js"></script>
+    </body>
+</html>
