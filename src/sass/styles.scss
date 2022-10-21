@@ -48,14 +48,14 @@ body{
     top: 50%;
     box-shadow: 0 1em 2em rgba(0 , 0 ,0, 0.2);
     border-radius: 0.5rem;
-    &__game{
+    #{&}__game{
         position: relative;
         width: 100%;
         display: grid;
         gap: 0.6em;
     }
 
-    &__status{
+    #{&}__status{
         text-align: left;
         margin-bottom: 2em;
         span{
