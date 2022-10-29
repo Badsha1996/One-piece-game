@@ -73,8 +73,8 @@ const timeGenerator = () => {
 };
 // auto move generator 
 let movesCount = 0;
-const movesCounter = () => {
-    movesCount += 1;
+const movesCounter = (num) => {
+    movesCount += num;
     moves.innerHTML = `<span>Moves: </span>${movesCount}`;
     if (movesCount > 10) {
         stopGame();
@@ -131,7 +131,7 @@ const matrixGenerator = (resultArray, size = 4) => {
                     firstCardValue = card.getAttribute("data-card-value");
                 }
                 else {
-                    movesCounter();
+                    movesCounter(1);
                     secondCard = card;
                     let secondCardValue = card.getAttribute("data-card-value");
                     if (firstCardValue == secondCardValue) {
@@ -139,6 +139,7 @@ const matrixGenerator = (resultArray, size = 4) => {
                         firstCard.classList.add("matched");
                         secondCard.classList.add("matched");
                         audioCorrect.play();
+                        movesCounter(-1);
                         firstCard = false;
                         winCount += 1;
                         // when user win the game 
