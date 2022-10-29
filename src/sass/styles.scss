@@ -106,6 +106,7 @@ button{
 
 .card-container{
     position: relative;
+    padding: 5.1em;
     width: 7rem;
     height: 7rem;
     cursor: pointer;
@@ -133,9 +134,11 @@ button{
 }
 .image{
     width: 10rem;
-    height: 10rem;
+    height: 9rem;
 }
-
+#audio{
+    display: none;
+}
 
 
 

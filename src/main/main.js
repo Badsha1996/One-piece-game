@@ -2,6 +2,7 @@
 // two buttons 
 const startButton = document.getElementById("start");
 const stopButton = document.getElementById("stop");
+const audio = document.getElementById("audio");
 const result = document.getElementById("result");
 // status values
 const moves = document.getElementById("moves");
@@ -30,6 +31,11 @@ let interval;
 let firstCard = false;
 let secondCard = false;
 let winCount = 0;
+// audio music playing 
+const playMusic = () => {
+    audio.play();
+    audio.load();
+};
 // auto time generator 
 // 01:29:34  => 01:30:00
 let seconds = 0;
@@ -83,6 +89,48 @@ const matrixGenerator = (resultArray, size = 4) => {
         `;
     }
     gameContainer.style.gridTemplateColumns = `repeat(${size}, auto)`;
+    // clicking on the cards 
+    cards = document.querySelectorAll(".card-container");
+    cards.forEach((card) => {
+        card.addEventListener("click", () => {
+            // check if the card is already flipped
+            if (!card.classList.contains("matched")) {
+                // flipped the card
+                card.classList.add("flipped");
+                var firstCardValue;
+                if (!firstCard) {
+                    firstCard = card;
+                    firstCardValue = card.getAttribute("data-card-value");
+                }
+                else {
+                    movesCounter();
+                    secondCard = card;
+                    let secondCardValue = card.getAttribute("data-card-value");
+                    if (firstCardValue == secondCardValue) {
+                        // both card matched then set matched class in them
+                        firstCard.classList.add("matched");
+                        secondCard.classList.add("matched");
+                        firstCard = false;
+                        winCount += 1;
+                        // when user win the game 
+                        if (winCount == Math.floor(resultArray.length / 2)) {
+                            result.innerHTML = `<h2>Player won</h2>
+                            <h4>Total Moves: ${movesCount}</h4>`;
+                            // stopGame();
+                        }
+                    }
+                    else {
+                        firstCard = false;
+                        secondCard = false;
+                        let [tempFirstCard, tempSecondCard] = [firstCard, secondCard];
+                        let delay = setTimeout(() => {
+                            tempFirstCard.classList.remove("flipped");
+                            tempSecondCard.classList.remove("flipped");
+                        }, 1000);
+                    }
+                }
+            }
+        });
+    });
 };
-matrixGenerator(generateRandom(4), 4);
 //# sourceMappingURL=main.js.map
