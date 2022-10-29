@@ -12,14 +12,24 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
     </head>
     <body>
-        <!-- =============== TITLE IMAGE ================ -->
-        <!-- <div class="title">
-            <img src="./assets/logo.png" alt="one piece logo" class="title__image">
-        </div> -->
+        
         <!-- =============== Audio ================ -->
-        <!-- <audio id="audio" controls loop>
+        <audio id="audio" loop>
             <source src="./assets/music.mp3" type="audio/mp3">
-        </audio> -->
+        </audio>
+
+        <audio id="audio-win" loop>
+            <source src="./assets/win.mp3" type="audio/mp3">
+        </audio>
+        <audio id="audio-loose" loop>
+            <source src="./assets/loose.mp3" type="audio/mp3">
+        </audio>
+        <audio id="audio-correct">
+            <source src="./assets/correct.mp3" type="audio/mp3">
+        </audio>
+        <audio id="audio-wrong">
+            <source src="./assets/wrong.mp3" type="audio/mp3">
+        </audio>
 
         <!-- =============== GAME ================ -->
 
@@ -27,6 +37,9 @@
             <div class="main-container__status">
                 <div id="time"></div>
                 <div id="moves"></div>
+                
+                <div class="audio-play"> <img src="./assets/audio-icon.png" alt="icon" class="icon"></div>
+                <div class="audio-pause"><img src="./assets/no-audio.png" alt="icon" class="icon"></div>
             </div>
 
             <div class="main-container__game">
@@ -42,6 +55,7 @@
         </div>
 
         <!-- ========= Script file linking ========== -->
+        
         <script src="./main/main.js"></script>
     </body>
 </html>
