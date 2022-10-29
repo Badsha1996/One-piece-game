@@ -102,7 +102,16 @@ button{
 
 #result{
     text-align: center;
+    h2{
+        font-size: 2.5rem;
+    }
+    h4{
+        font-size: 1.8rem;
+        margin: 0.5em 0 1em 0;
+    }
 }
+
+
 
 .card-container{
     position: relative;
@@ -119,8 +128,7 @@ button{
         @include flexbox(row);
         border: 0.25rem solid $primary-light;
         transition: transform 0.6s ease-out;
-
-        // backface-visibility: hidden;
+        backface-visibility: hidden;
     }
     &__after{
         background-color: $primary-color-dark;
@@ -132,6 +140,14 @@ button{
         font-weight: 600;
     }
 }
+
+.card-container.flipped .card-container__before{
+     transform: rotateY(180deg);
+}
+.card-container.flipped .card-container__after{
+    transform: rotateY(0deg);
+}
+
 .image{
     width: 10rem;
     height: 9rem;

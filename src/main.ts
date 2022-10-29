@@ -1,6 +1,6 @@
 // two buttons 
-const startButton = document.getElementById("start");
-const stopButton = document.getElementById("stop");
+const startButton : HTMLElement = document.getElementById("start") as HTMLElement;
+const stopButton: HTMLElement = document.getElementById("stop")as HTMLElement;
 
 const audio : HTMLAudioElement = document.getElementById("audio") as HTMLAudioElement;
 const result: HTMLElement = document.getElementById("result") as HTMLElement;
@@ -10,7 +10,7 @@ const moves: HTMLElement = document.getElementById("moves") as HTMLElement;
 const time : HTMLElement = document.getElementById("time") as HTMLElement;
 
 // container 
-const controls = document.querySelector(".controls-container");
+const controls: HTMLElement = document.querySelector(".controls-container")as HTMLElement;
 const gameContainer :  HTMLElement = document.querySelector(".main-container__game") as HTMLElement;
 
 // Image Array for the game 
@@ -31,10 +31,12 @@ const items = [
 
 // total card
 let cards;
-let interval;
+let interval: string | number | NodeJS.Timer | undefined;
 let firstCard  : any = false;
 let secondCard : any = false;
 let winCount: number   = 0;
+let firstCardValue: string | null;
+
 
 // audio music playing 
 const playMusic = () =>{
@@ -87,6 +89,8 @@ const generateRandom = (size : number = 4) =>{
 }
 
 const matrixGenerator = (resultArray : {name: string, image: string}[], size:number = 4) =>{
+    // audio generate 
+    playMusic();
     // duplicate elements 
     resultArray = [...resultArray, ...resultArray];
     resultArray.sort(() => Math.random() - 0.5);
@@ -111,14 +115,16 @@ const matrixGenerator = (resultArray : {name: string, image: string}[], size:num
             if(!card.classList.contains("matched")){
                 // flipped the card
                 card.classList.add("flipped");
-                var firstCardValue;
+                
                 if(!firstCard){
                     firstCard = card;
                     firstCardValue = card.getAttribute("data-card-value");
+                    
                 }else{
                     movesCounter();
                     secondCard = card;
                     let secondCardValue = card.getAttribute("data-card-value");
+                    
                     if(firstCardValue == secondCardValue){
                         // both card matched then set matched class in them
                         firstCard.classList.add("matched");
@@ -130,18 +136,20 @@ const matrixGenerator = (resultArray : {name: string, image: string}[], size:num
                         if(winCount == Math.floor(resultArray.length / 2)){
                             result.innerHTML = `<h2>Player won</h2>
                             <h4>Total Moves: ${movesCount}</h4>`;
-                            // stopGame();
+                            stopGame();
                             
                         }
 
                     }else{
+                        let [tempFirstCard, tempSecondCard] = [firstCard, secondCard]
                         firstCard = false;
                         secondCard = false;
-                        let [tempFirstCard, tempSecondCard] = [firstCard, secondCard]
+                      
                         let delay = setTimeout(() => {
                             tempFirstCard.classList.remove("flipped");
                             tempSecondCard.classList.remove("flipped");
                         }, 1000);
+                        
                     }
                 }
             }       
@@ -149,9 +157,37 @@ const matrixGenerator = (resultArray : {name: string, image: string}[], size:num
     })
 }
 
+startButton.addEventListener("click", ()=>{
+    movesCount = 0;
+    seconds = 0;
+    minutes = 0;
 
+    controls.classList.add("hide");
+    stopButton.classList.remove("hide");
+    startButton.classList.add("hide");
 
+    // timer 
+    interval = setInterval(timeGenerator, 1000)
+    moves.innerHTML = `<span>Moves: </span>${movesCount}`
 
+    playGame();
+
+})
+const stopGame= () => { 
+    controls.classList.remove("hide");
+    stopButton.classList.add("hide");
+    startButton.classList.remove("hide");
+    clearInterval(interval)
+}
+
+stopButton.addEventListener("click", stopGame)
+
+const playGame = () =>{
+    result.innerHTML = "";
+    winCount = 0;
+    let cardValues = generateRandom();
+    matrixGenerator(cardValues);
+}
 
 
 
